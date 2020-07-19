@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<body>
+<div th:if="${message} != null">
+    <div class="alert alert-info">
+        <p th:text="${message}"></p>
+    </div>
+</div>
+<form th:action="@{/registration}" method="post" th:object="${user}" >
+    <div><label> User Email : <input type="email" name="email" th:field="*{email}"/> </label></div>
+    <div><label> Password: <input type="password" name="password" th:field="*{password}"/> </label></div>
+    <div><label> First Name: <input type="text" name="firstName" th:field="*{person.firstName}"/> </label></div>
+    <div><label> Last Name: <input type="text" name="lastName" th:field="*{person.lastName}"/> </label></div>
+    <div><label> Role
+        <div>
+            <input type="radio" th:field="*{role}" th:value="student" />
+            <label>Student</label>
+        </div>
+        <div>
+            <input type="radio" th:field="*{role}" th:value="teacher" />
+            <label>Teacher</label>
+        </div>
+
+    </label></div>
+    <div><button type="submit">Register me</button></div>
+</form>
+</body>
+</html>
