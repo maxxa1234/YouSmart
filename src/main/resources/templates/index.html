@@ -1,7 +1,11 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<div th:replace="parts/bootstrap :: head"></div>
 <body>
-Hello
+<div th:replace="parts/navbar :: #navbar"></div>
+<div class="container">
+    <a href="/logout">Log out</a>
+</div>
+<div th:replace="parts/bootstrap :: script"></div>
 </body>
 </html>

@@ -1,17 +1,28 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<div th:replace="parts/bootstrap :: head"></div>
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
+<div th:replace="parts/navbar :: #navbar"></div>
+<div class="container">
+    <div th:if="${param.error}">
+        Invalid username and password.
+    </div>
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
+    <form th:action="@{/login-process}" method="post" >
+        <div class="form-group">
+            <label for="exampleInputEmail1"> User Email : </label>
+            <input type="email" name="email"  class="form-control" id="exampleInputEmail1"
+                   aria-describedby="emailHelp"/>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1" > Password: </label>
+            <input type="password" name="password"  class="form-control" id="exampleInputPassword1"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Log In</button>  <button onClick='location.href="/registration"' type="button" class="btn btn-primary ml-5">Register</button>
+    </form>
 </div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<form th:action="@{/login-process}" method="post">
-    <div><label> User Email : <input type="email" name="email"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
+<div th:replace="parts/bootstrap :: script"></div>
 </body>
 </html>

@@ -1,29 +1,61 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<div th:replace="parts/bootstrap :: head"></div>
 <body>
-<div th:if="${message} != null">
-    <div class="alert alert-info">
-        <p th:text="${message}"></p>
+<div th:replace="parts/navbar :: #navbar"></div>
+<div class="container">
+    <div th:if="${message} != null">
+        <div class="alert alert-info">
+            <p th:text="${message}"></p>
+        </div>
     </div>
+    <form th:action="@{/registration}" method="post" th:object="${user}" class="mt-3">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label> User Email : </label>
+                <input type="email" name="email" class="form-control" th:field="*{email}"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label> Password: </label>
+                <input type="password" name="password" class="form-control" th:field="*{password}"/>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label> First Name: </label>
+                <input type="text" name="firstName" class="form-control" th:field="*{person.firstName}"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label> Last Name: </label>
+                <input type="text" name="lastName" class="form-control" th:field="*{person.lastName}"/>
+            </div>
+        </div>
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0"> Role</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input id="gridRadios1" class="form-check-input" type="radio" th:field="*{role}"
+                               th:value="student"/>
+                        <label class="form-check-label" for="gridRadios1">Student</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" id="gridRadios2" type="radio" th:field="*{role}"
+                               th:value="teacher"/>
+                        <label class="form-check-label" for="gridRadios2">Teacher</label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Register me</button>
+            </div>
+        </div>
+    </form>
 </div>
-<form th:action="@{/registration}" method="post" th:object="${user}" >
-    <div><label> User Email : <input type="email" name="email" th:field="*{email}"/> </label></div>
-    <div><label> Password: <input type="password" name="password" th:field="*{password}"/> </label></div>
-    <div><label> First Name: <input type="text" name="firstName" th:field="*{person.firstName}"/> </label></div>
-    <div><label> Last Name: <input type="text" name="lastName" th:field="*{person.lastName}"/> </label></div>
-    <div><label> Role
-        <div>
-            <input type="radio" th:field="*{role}" th:value="student" />
-            <label>Student</label>
-        </div>
-        <div>
-            <input type="radio" th:field="*{role}" th:value="teacher" />
-            <label>Teacher</label>
-        </div>
 
-    </label></div>
-    <div><button type="submit">Register me</button></div>
-</form>
+
+<div th:replace="parts/bootstrap :: script"></div>
 </body>
 </html>

@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class GreetingController {
 
 
-    @GetMapping("/greeting")
+    @GetMapping("/")
     public ModelAndView greeting(){
         ModelAndView modelAndView = new ModelAndView("greeting");
         modelAndView.addObject("name", "name");
