@@ -2,6 +2,8 @@ package com.you_smart.enteties;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -19,6 +21,8 @@ public class User {
     @JoinColumn(name="person_id", referencedColumnName = "id")
     private Person person;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Course> courses = new HashSet<Course>();
 
     public User() {
     }
@@ -61,5 +65,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
     }
 }

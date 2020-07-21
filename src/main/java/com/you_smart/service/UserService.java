@@ -5,6 +5,7 @@ import com.you_smart.exception.UserServiceException;
 import com.you_smart.repositories.PersonRepository;
 import com.you_smart.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,10 @@ public class UserService {
         Optional<User> userFromDB = userRepository.findByEmail(user.getEmail());
 
         return userFromDB.isPresent();
+    }
+
+    public User currentUser(String email){
+       return userRepository.findByEmail(email).get();
     }
 
 }
