@@ -14,8 +14,8 @@ public class CourseService {
     @Autowired
     private UserService userService;
 
-    public void addNewCourse(Course course,String email){
-        course.setUser(userService.currentUser(email));
+    public void addNewCourse(Course course){
+        course.setUser(userService.getCurrentUser());
         courseRepository.save(course);
     }
 }

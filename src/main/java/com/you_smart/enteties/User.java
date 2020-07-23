@@ -2,7 +2,6 @@ package com.you_smart.enteties;
 
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,7 +21,7 @@ public class User {
     private Person person;
 
     @OneToMany(mappedBy = "user")
-    private Set<Course> courses = new HashSet<Course>();
+    private Set<Course> courses;
 
     public User() {
     }
