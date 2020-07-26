@@ -1,11 +1,30 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <div th:replace="parts/bootstrap :: head"></div>
 <body>
 <div th:replace="parts/navbar :: #navbar"></div>
-<div class="container">
-    <button onClick='location.href="/courseCreation"' type="button" class="btn btn-primary ml-5"> Create new course</button>
-    <a href="/logout">Log out</a>
+<div class="container" th:if="${user.getRole() == 'teacher'}">
+    <button onClick='location.href="/courseCreation"' type="button" class="btn btn-primary ml-5"> Create new course
+    </button>
+</div>
+<div class="container" th:if="${user.getRole() == 'student'}">
+    <tr th:if="${courses.empty}">
+        <td colspan="2"> No Courses Available</td>
+    </tr>
+    <tr th:each="course : ${courses}">
+        <form th:action="@{/index}" method="post" th:object="${course}">
+            <div class="card">
+                <div class="card-body">
+                    <td><span th:text="${course.getName()}"> Title </span></td>
+                    <td><span th:text="${course.getType()}"> Author </span></td>
+                    <td>
+                        <button type="submit" class="btn btn-primary ml-5" th:value="${course.getId()}" name="id">Join</button>
+                    </td>
+                </div>
+            </div>
+        </form>
+    </tr>
+
 </div>
 <div th:replace="parts/bootstrap :: script"></div>
 </body>
