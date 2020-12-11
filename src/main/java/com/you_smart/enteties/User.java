@@ -23,6 +23,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Course> courses;
 
+    @ManyToMany(mappedBy = "students")
+    private Set<Course> coursesForStudents;
+
     public User() {
     }
 
@@ -72,5 +75,13 @@ public class User {
 
     public void setCourses(Set<Course> courses) {
         this.courses = courses;
+    }
+
+    public Set<Course> getCoursesForStudents() {
+        return coursesForStudents;
+    }
+
+    public void setCoursesForStudents(Set<Course> coursesForStudents) {
+        this.coursesForStudents = coursesForStudents;
     }
 }

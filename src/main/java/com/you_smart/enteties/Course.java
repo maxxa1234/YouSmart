@@ -1,6 +1,7 @@
 package com.you_smart.enteties;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name= "courses")
@@ -17,8 +18,16 @@ public class Course {
     private  String  type;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private User user;
+
+    @ManyToMany( cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "students_courses",
+            joinColumns = @JoinColumn (name = "course_id"),
+            inverseJoinColumns = @JoinColumn (name = "student_id")
+    )
+    private Set<User> students;
 
     public Course() {
     }
@@ -53,5 +62,13 @@ public class Course {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<User> getStudents() {
+        return students;
+    }
+
+    public void setStudents(User user) {
+        this.students.add(user);
     }
 }

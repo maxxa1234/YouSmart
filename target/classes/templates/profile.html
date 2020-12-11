@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="parts/bootstrap :: head"></div>
+<body>
+<div th:replace="parts/navbar :: #navbar"></div>
+<div class="container" th:if="${user.getRole() == 'teacher'}">
+    <tr th:if="${courses.isEmpty()}">
+        <td colspan="2"> No Courses Available</td>
+    </tr>
+    <tr th:each="course : ${courses}">
+        <div class="card mb-3">
+            <div class="card-body">
+                <td><span th:text="${course.getName()}"> Title </span></td>
+                <td><h6 th:text="${course.getType()}"> Author </h6></td>
+                <p>Author: </p>
+                <span th:text="${course.getUser().getPerson().getFirstName()}"></span>
+            </div>
+        </div>
+    </tr>
+</div>
+<div class="container"  th:if="${user.getRole() == 'student'}">
+    <tr th:if="${studentsCourses.isEmpty()}">
+        <td colspan="2"> No Courses Available</td>
+    </tr>
+    <tr th:each="course : ${studentsCourses}">
+        <div class="card">
+            <div class="card-body">
+                <td><span th:text="${course.getName()}"> Title </span></td>
+                <td><span th:text="${course.getType()}"> Author </span></td>
+                <p>Author: </p>
+                <span th:text="${course.getUser().getPerson().getFirstName()}"></span>
+            </div>
+        </div>
+    </tr>
+</div>
+<div th:replace="parts/bootstrap :: script"></div>
+</body>
+</html>
