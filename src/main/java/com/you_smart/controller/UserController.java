@@ -17,11 +17,14 @@ import java.util.List;
 @Controller
 public class UserController {
 
-    @Autowired
     private UserService userService;
+    private CourseService courseService;
 
     @Autowired
-    private CourseService courseService;
+    public UserController(UserService userService, CourseService courseService) {
+        this.userService = userService;
+        this.courseService = courseService;
+    }
 
     @GetMapping("/registration")
     public ModelAndView registration(){
@@ -44,10 +47,9 @@ public class UserController {
 
     @GetMapping("/profile")
     public ModelAndView profile(){
-        List<Course> courses = courseService.getCurrentUserCourses();
         ModelAndView modelAndView = new ModelAndView("profile");
         modelAndView.addObject("user", userService.getCurrentUser());
-        modelAndView.addObject("courses",courses);
+        modelAndView.addObject("courses", userService.getCurrentUser().getCourses());
         modelAndView.addObject("studentsCourses",userService.getCurrentUser().getCoursesForStudents());
         return modelAndView;
     }

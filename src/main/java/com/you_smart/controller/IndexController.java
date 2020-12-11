@@ -15,11 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
 
-    @Autowired
     private UserService userService;
+    private CourseService courseService;
 
     @Autowired
-    private CourseService courseService;
+    public IndexController(UserService userService, CourseService courseService) {
+        this.userService = userService;
+        this.courseService = courseService;
+    }
 
     @GetMapping("/index")
     public ModelAndView index(){

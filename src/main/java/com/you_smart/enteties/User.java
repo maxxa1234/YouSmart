@@ -23,12 +23,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Course> courses;
 
-//    @ManyToMany( cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name = "students_courses",
-//            joinColumns = @JoinColumn (name = "student_id"),
-//            inverseJoinColumns = @JoinColumn (name = "course_id")
-//    )
     @ManyToMany(mappedBy = "students")
     private Set<Course> coursesForStudents;
 

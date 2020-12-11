@@ -8,20 +8,29 @@
     </button>
 </div>
 <div class="container" th:if="${user.getRole() == 'student'}">
-    <tr th:if="${courses.empty}">
+    <tr th:if="${courses.isEmpty()}">
         <td colspan="2"> No Courses Available</td>
     </tr>
     <tr th:each="course : ${courses}">
         <form th:action="@{/index}" method="post" th:object="${course}">
-            <div class="card">
-                <div class="card-body">
-                    <td><span th:text="${course.getName()}"> Title </span></td>
-                    <td><span th:text="${course.getType()}"> Author </span></td>
-                    <td>
-                        <button type="submit" class="btn btn-primary ml-5" th:value="${course.getId()}" name="id">Join</button>
-                    </td>
-                </div>
+            <div class="list-group">
+                <button  class="list-group-item list-group-item-action"  type="submit"  th:value="${course.getId()}" name="id">
+                    <span th:text="${course.getName()}"> Title </span>
+                    <span th:text="${course.getType()}"> Type </span>
+                    <p>Author: </p>
+                    <span th:text="${course.getUser().getPerson().getFirstName()}"></span>
+                </button>
+
             </div>
+<!--            <div class="card">-->
+<!--                <div class="card-body">-->
+<!--                    <td><span th:text="${course.getName()}"> Title </span></td>-->
+<!--                    <td><span th:text="${course.getType()}"> Author </span></td>-->
+<!--                    <td>-->
+<!--                        <button type="submit" class="btn btn-primary ml-5" th:value="${course.getId()}" name="id">Join</button>-->
+<!--                    </td>-->
+<!--                </div>-->
+<!--            </div>-->
         </form>
     </tr>
 

@@ -11,19 +11,19 @@ import java.util.List;
 @Service
 public class CourseService {
 
-    @Autowired
+
     private CourseRepository courseRepository;
+    private UserService userService;
 
     @Autowired
-    private UserService userService;
+    public CourseService(CourseRepository courseRepository, UserService userService) {
+        this.courseRepository = courseRepository;
+        this.userService = userService;
+    }
 
     public void addNewCourse(Course course){
         course.setUser(userService.getCurrentUser());
         courseRepository.save(course);
-    }
-
-    public List<Course> getCurrentUserCourses(){
-       return courseRepository.findByUser(userService.getCurrentUser());
     }
 
     public List<Course> getAllCourses(){

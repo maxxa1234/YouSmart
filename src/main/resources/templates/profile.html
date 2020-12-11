@@ -8,10 +8,12 @@
         <td colspan="2"> No Courses Available</td>
     </tr>
     <tr th:each="course : ${courses}">
-        <div class="card">
+        <div class="card mb-3">
             <div class="card-body">
                 <td><span th:text="${course.getName()}"> Title </span></td>
-                <td><span th:text="${course.getType()}"> Author </span></td>
+                <td><h6 th:text="${course.getType()}"> Author </h6></td>
+                <p>Author: </p>
+                <span th:text="${course.getUser().getPerson().getFirstName()}"></span>
             </div>
         </div>
     </tr>
@@ -25,6 +27,8 @@
             <div class="card-body">
                 <td><span th:text="${course.getName()}"> Title </span></td>
                 <td><span th:text="${course.getType()}"> Author </span></td>
+                <p>Author: </p>
+                <span th:text="${course.getUser().getPerson().getFirstName()}"></span>
             </div>
         </div>
     </tr>
